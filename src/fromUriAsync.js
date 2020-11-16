@@ -1,5 +1,5 @@
 // @flow
-import { Asset } from 'expo-asset';
+import Expo from 'expo-asset';
 import { getSizeAsync } from './ImageUtils';
 import fileInfoAsync from './fileInfoAsync';
 
@@ -29,7 +29,7 @@ async function fromUriAsync(remoteUri: string, fileName: ?string): Promise<Asset
       height = size.height;
     }
 
-    return new Asset({ name, type, hash, uri, width, height });
+    return new Expo.Asset({ name, type, hash, uri, width, height });
   }
 }
 

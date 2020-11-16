@@ -1,5 +1,5 @@
 // @flow
-import { Asset } from 'expo-asset';
+import Expo from 'expo-asset';
 import isReactImageFormat from './isReactImageFormat';
 import fromUriAsync from './fromUriAsync';
 
@@ -9,14 +9,14 @@ type ImageFormat = {
   height?: number,
 };
 
-export type WildCard = Asset | number | string | ImageFormat;
+export type WildCard = Expo.Asset | number | string | ImageFormat;
 
 export type Options = {
   fileName: string,
 };
 
 const resolveAsync = async (fileReference: WildCard, options: Options = {}): Promise<?Asset> => {
-  if (fileReference instanceof Asset) {
+  if (fileReference instanceof Expo.Asset) {
     /// Asset
     if (!fileReference.localUri) {
       await fileReference.downloadAsync();
@@ -30,7 +30,7 @@ const resolveAsync = async (fileReference: WildCard, options: Options = {}): Pro
     }
   } else if (typeof fileReference === 'number') {
     /// static resource
-    const asset = await Asset.fromModule(fileReference);
+    const asset = await Expo.Asset.fromModule(fileReference);
     const output = await resolveAsync(asset);
     return output;
   } else if (isReactImageFormat(fileReference)) {
